@@ -33,3 +33,30 @@ CREATION_TEST_CASES = {
 )
 def test_creating_a_datetime(moment, expected):
     assert Datetime(moment) == expected
+
+
+def test_as_a_time_freezing_context():
+    with Datetime(NAIVE_DATETIME):
+        assert Datetime() == Datetime(NAIVE_DATETIME)
+    assert Datetime() > Datetime(NAIVE_DATETIME)
+
+
+def test_as_time_freezing_decorator():
+    @Datetime.freeze("2022-12-03 12:36:45")
+    def with_frozen_time():
+        return Datetime()
+
+    assert with_frozen_time() == Datetime("2022-12-03 12:36:45")
+
+
+def test_is_same_as():
+    assert Datetime(NAIVE_DATETIME).is_same_as("2022-11-26 13:08:50")
+
+
+def test_comparing():
+    assert Datetime(NAIVE_DATETIME) < Datetime()
+    assert Datetime(AWARE_DATETIME) < Datetime()
+    assert Datetime(DATETIME_WITH_TZINFO) < Datetime(AWARE_DATETIME)
+    assert Datetime(NAIVE_DATETIME) < datetime.now(tz=UTC)
+    assert Datetime(AWARE_DATETIME) < datetime.now(tz=UTC)
+    assert Datetime(DATETIME_WITH_TZINFO) < AWARE_DATETIME
