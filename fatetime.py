@@ -4,7 +4,7 @@ UTC = timezone.utc
 
 
 class Datetime(datetime):
-    frozen = None
+    _frozen = None
 
     def __new__(cls, moment=None):
         converted = cls.to_datetime(moment)
@@ -25,11 +25,11 @@ class Datetime(datetime):
         )
 
     def __enter__(self):
-        self.__class__.frozen = self
+        self.__class__._frozen = self
         return self
 
     def __exit__(self, *exc_details):
-        self.__class__.frozen = None
+        self.__class__._frozen = None
 
     @classmethod
     def freeze(cls, moment):
@@ -54,7 +54,7 @@ class Datetime(datetime):
 
     @classmethod
     def _now(cls):
-        return cls.frozen or datetime.now(tz=UTC)
+        return cls._frozen or datetime.now(tz=UTC)
 
     @staticmethod
     def _handle_zulu(iso_datetime):
