@@ -35,6 +35,18 @@ def test_creating_a_datetime(moment, expected):
     assert Datetime(moment) == expected
 
 
+def test_repr():
+    expected = "Datetime(2022, 11, 26, 13, 8, 50, tzinfo=datetime.timezone.utc)"
+    assert repr(Datetime(AWARE_DATETIME)) == expected
+    assert repr(Datetime(NAIVE_DATETIME)) == expected
+
+
+def test_str():
+    expected = "2022-11-26 13:08:50+00:00"
+    assert str(Datetime(AWARE_DATETIME)) == expected
+    assert str(Datetime(NAIVE_DATETIME)) == expected
+
+
 def test_as_a_time_freezing_context():
     with Datetime(NAIVE_DATETIME):
         assert Datetime() == Datetime(NAIVE_DATETIME)
