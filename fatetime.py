@@ -59,10 +59,10 @@ class Datetime(datetime):
     @staticmethod
     def _handle_zulu(iso_datetime):
         """
-        >>> handle_zulu("2022-12-01T09:17:45Z")
+        >>> Datetime._handle_zulu("2022-12-01T09:17:45Z")
         '2022-12-01T09:17:45+00:00'
 
-        >>> handle_zulu("2022-12-01 09:17:45z")
+        >>> Datetime._handle_zulu("2022-12-01 09:17:45z")
         '2022-12-01 09:17:45+00:00'
         """
         if iso_datetime.endswith(("z", "Z")):
