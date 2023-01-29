@@ -31,8 +31,13 @@ CREATION_TEST_CASES = {
     CREATION_TEST_CASES.values(),
     ids=CREATION_TEST_CASES.keys(),
 )
-def test_creating_a_datetime(moment, expected):
+def test_creating_a_Datetime(moment, expected):
     assert Datetime(moment) == expected
+
+
+def test_creating_a_Datetime_from_another_Datetime():
+    with Datetime() as now:
+        assert Datetime(now) == now
 
 
 def test_repr():
@@ -63,6 +68,9 @@ def test_as_time_freezing_decorator():
 
 def test_is_same_as():
     assert Datetime(NAIVE_DATETIME).is_same_as("2022-11-26 13:08:50")
+    assert Datetime(AWARE_DATETIME).is_same_as(NAIVE_DATETIME)
+    assert Datetime(AWARE_DATETIME).is_same_as(AWARE_DATETIME)
+    assert Datetime().is_same_as(1) is False
 
 
 def test_comparing():

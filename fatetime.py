@@ -76,12 +76,6 @@ class Datetime(datetime):
         """
         This is a potential precursor to changing the behaviour of __eq__ et al.
         The jury is still out on this one...
-
-        >>> Datetime("2022-12-01T09:17:45Z").is_same_as(datetime(2022, 12, 1, 9, 17, 45))
-        True
-
-        >>> Datetime().is_same_as(1)
-        False
         """
         try:
             return self == self.__class__(other)
