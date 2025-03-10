@@ -1,5 +1,7 @@
 # Fatetime
 
+**NB:** This repository has been moved to [https://codeberg.org/DevL/fatetime](https://codeberg.org/DevL/fatetime).
+
 _A funnier datetime._
 
 ## Current Functionality
